@@ -1,13 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles follow here */
+
+/* src/index.css */
+
+/* Ensure that the main content has top padding to accommodate the fixed navbar */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding-top: 4rem; /* Adjust based on navbar height */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Example dark theme classes */
+.bg-darkBackground {
+  background-color: #1a202c; /* Example dark background */
 }
+
+.bg-darkCard {
+  background-color: #2d3748; /* Dark card background */
+}
+
+.text-link {
+  color: #3182ce; /* Link color */
+}
+
+.bg-link {
+  background-color: #3182ce; /* Link background */
+}
+
