@@ -1,66 +1,55 @@
 // src/components/ChangeCommunityModal.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
-import Modal from './Modal'; // Ensure you have a generic Modal component
+import Modal from './Modal';
 
-const ChangeCommunityModal = ({ isOpen, onClose, currentCommunity, onChange }) => {
-  const communityOptions = [
-    { value: 'All Communities', label: 'All Communities' },
-    { value: 'Arab', label: 'Arab' },
-    { value: 'African', label: 'African' },
-    { value: 'American', label: 'American' },
-    { value: 'Syrian', label: 'Syrian' },
+function ChangeCommunityModal({ isOpen, onClose, currentCommunity, onChange }) {
+  const [selectedCommunity, setSelectedCommunity] = useState(currentCommunity);
+  const communities = [
+    'Foreigners around the world',
+    'Syrians in Japan',
+    'Iraqis in Japan',
+    'Spanish in Japan',
+    'Americans in Japan',
     // Add more communities as needed
   ];
 
-  const handleCommunitySelect = (selectedOption) => {
-    onChange(selectedOption);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onChange({ value: selectedCommunity });
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="bg-darkCard p-6 rounded-lg w-full max-w-md mx-auto">
-        {/* Modal Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Change Community</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
-            &times;
-          </button>
-        </div>
-
-        {/* Community Selection */}
-        <div className="mb-4">
-          <Select
-            options={communityOptions}
-            defaultValue={communityOptions.find(option => option.value === currentCommunity)}
-            onChange={handleCommunitySelect}
-            className="text-black"
-          />
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex justify-end space-x-2">
+      <div>
+        <h2 className="text-xl font-bold mb-4">Change Community</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-300 mb-2">Select Community</label>
+            <select
+              value={selectedCommunity}
+              onChange={(e) => setSelectedCommunity(e.target.value)}
+              className="w-full p-2 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {communities.map((community, index) => (
+                <option key={index} value={community}>
+                  {community}
+                </option>
+              ))}
+            </select>
+          </div>
           <button
-            onClick={onClose}
-            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md transition duration-200"
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg"
           >
-            Cancel
+            Change
           </button>
-          <button
-            onClick={() => {
-              onClose();
-            }}
-            className="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-md transition duration-200"
-          >
-            Save
-          </button>
-        </div>
+        </form>
       </div>
     </Modal>
   );
-};
+}
 
 ChangeCommunityModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,

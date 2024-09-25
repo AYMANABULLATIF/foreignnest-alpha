@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles follow here */
-
-/* src/index.css */
+//* src/index.css */
 
 /* Ensure that the main content has top padding to accommodate the fixed navbar */
 body {
@@ -20,6 +18,10 @@ body {
   background-color: #2d3748; /* Dark card background */
 }
 
+.bg-darkAccent {
+  background-color: #2c5282; /* Dark accent for navbar */
+}
+
 .text-link {
   color: #3182ce; /* Link color */
 }
@@ -27,4 +29,3 @@ body {
 .bg-link {
   background-color: #3182ce; /* Link background */
 }
-

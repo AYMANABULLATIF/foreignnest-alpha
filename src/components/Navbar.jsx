@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaPlus } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-const Navbar = ({ toggleSidebar = () => {} }) => { // Default parameter
+const Navbar = ({ toggleSidebar = () => {} }) => {
   const navigate = useNavigate();
 
   return (
@@ -24,6 +24,9 @@ const Navbar = ({ toggleSidebar = () => {} }) => { // Default parameter
         </Link>
         <Link to="/global-posts" className="hover:text-blue-400">
           Global Posts
+        </Link>
+        <Link to="/places" className="hover:text-blue-400">
+          Places
         </Link>
         <Link to="/profile" className="hover:text-blue-400">
           Profile
@@ -52,7 +55,5 @@ const Navbar = ({ toggleSidebar = () => {} }) => { // Default parameter
 Navbar.propTypes = {
   toggleSidebar: PropTypes.func,
 };
-
-// Removed Navbar.defaultProps
 
 export default Navbar;

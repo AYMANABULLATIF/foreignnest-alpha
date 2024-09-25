@@ -15,14 +15,18 @@ function Profile() {
     language: 'Arabic, English',
     location: 'Tokyo, Japan',
     interests: 'Traveling, Cooking, Photography',
+    openToMeet: true,
   });
 
   const [isEditing, setIsEditing] = useState(false);
   const [editProfile, setEditProfile] = useState(profile);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditProfile((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setEditProfile((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
 
   const handleSave = () => {
@@ -122,6 +126,16 @@ function Profile() {
                   className="w-full bg-gray-800 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
+              <div className="mb-4 flex items-center">
+                <input
+                  type="checkbox"
+                  name="openToMeet"
+                  checked={editProfile.openToMeet}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                <label className="text-gray-300">Open to Meet</label>
+              </div>
               <button
                 onClick={handleSave}
                 className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg flex items-center space-x-2"
@@ -146,6 +160,9 @@ function Profile() {
               </p>
               <p className="mt-2">
                 <strong>Interests:</strong> {profile.interests}
+              </p>
+              <p className="mt-2">
+                <strong>Open to Meet:</strong> {profile.openToMeet ? 'Yes' : 'No'}
               </p>
               <button
                 onClick={() => setIsEditing(true)}

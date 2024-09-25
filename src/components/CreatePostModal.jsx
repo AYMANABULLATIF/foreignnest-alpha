@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTimes, FaImage, FaPoll, FaSave } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import Modal from './Modal'; // Ensure Modal.jsx exists and is correctly exported
+import Modal from './Modal';
 
 const CreatePostModal = ({ isOpen, onClose, onCreate }) => {
   // State for post type: 'text', 'image', 'poll'
@@ -141,6 +141,8 @@ const CreatePostModal = ({ isOpen, onClose, onCreate }) => {
     setFormData(draft.formData);
     onClose(); // Close the modal after loading
   };
+
+  if (!isOpen) return null; // Ensure modal is only rendered when open
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -322,7 +324,6 @@ const CreatePostModal = ({ isOpen, onClose, onCreate }) => {
   );
 };
 
-// Define propTypes outside the component
 CreatePostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,    // Controls the visibility of the modal
   onClose: PropTypes.func.isRequired,   // Function to close the modal
