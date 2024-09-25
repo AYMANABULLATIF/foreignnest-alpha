@@ -2,30 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-//* src/index.css */
 
-/* Ensure that the main content has top padding to accommodate the fixed navbar */
+
+
 body {
-  padding-top: 4rem; /* Adjust based on navbar height */
+  padding-top: 4rem; 
 }
 
-/* Example dark theme classes */
+
 .bg-darkBackground {
-  background-color: #1a202c; /* Example dark background */
+  background-color: #1a202c;
 }
 
 .bg-darkCard {
-  background-color: #2d3748; /* Dark card background */
+  background-color: #2d3748; 
 }
 
 .bg-darkAccent {
-  background-color: #2c5282; /* Dark accent for navbar */
+  background-color: #2c5282; 
 }
 
 .text-link {
-  color: #3182ce; /* Link color */
+  color: #3182ce; 
 }
 
 .bg-link {
-  background-color: #3182ce; /* Link background */
+  background-color: #3182ce; 
 }
