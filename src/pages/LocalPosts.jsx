@@ -1,4 +1,4 @@
-// src/pages/LocalPosts.jsx
+// src/pages/LocalPosts.jsx (Updated to include Tooltips and Help Guide)
 
 import React, { useState } from 'react';
 import {
@@ -6,17 +6,20 @@ import {
   FaComment,
   FaShare,
   FaEllipsisH,
-  FaPoll, // Imported FaPoll
+  FaPoll,
 } from 'react-icons/fa';
-import MainLayout from '../layouts/MainLayout'; // Corrected import path
+import MainLayout from '../layouts/MainLayout';
 import CreatePostModal from '../components/CreatePostModal';
 import ChangeCommunityModal from '../components/ChangeCommunityModal';
 import FilterPanel from '../components/FilterPanel';
+import SearchBar from '../components/SearchBar';
+import Tooltip from '../components/Tooltip'; // Import Tooltip
+import HelpGuide from '../components/HelpGuide'; // Import HelpGuide
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function LocalPosts() {
-  const [defaultCommunity, setDefaultCommunity] = useState('Syrians in Japan');
+  const [defaultCommunity, setDefaultCommunity] = useState('Foreigners around the world');
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
@@ -25,6 +28,7 @@ function LocalPosts() {
     date: '',
     engagement: '',
   });
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Sample post data
   const [localPosts, setLocalPosts] = useState([
@@ -95,24 +99,32 @@ function LocalPosts() {
       }
     }
 
-    return matchesTopic && matchesDate && matchesEngagement;
+    const matchesSearch = post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesTopic && matchesDate && matchesEngagement && matchesSearch;
   });
 
   return (
     <MainLayout>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">{defaultCommunity}</h1>
-        <div className="flex space-x-4">
+        <div className="flex flex-col lg:flex-row lg:space-x-4 mt-4 lg:mt-0">
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder="Search posts..."
+          />
           <button
             onClick={() => setIsFilterOpen(true)}
-            className="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 px-4 rounded-lg"
+            className="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 text-gray-300 py-2 px-4 rounded-lg mt-4 lg:mt-0"
           >
             <FaEllipsisH />
             <span>Filter</span>
           </button>
           <button
             onClick={() => setIsCommunityModalOpen(true)}
-            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg"
+            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg mt-4 lg:mt-0"
           >
             <FaEllipsisH />
             <span>Change Community</span>
@@ -149,19 +161,12 @@ function LocalPosts() {
         onApply={handleApplyFilters}
       />
 
-      {/* Create Post Button */}
-      <button
-        onClick={() => setIsCreatePostModalOpen(true)}
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg z-50"
-        aria-label="Create Post"
-      >
-        <FaPoll size={24} />
-      </button>
+      {/* Help Guide */}
+      <HelpGuide />
     </MainLayout>
   );
 }
 
-// PostCard Component
 const PostCard = ({ post }) => (
   <div className="bg-darkCard text-white p-6 rounded-lg shadow-lg mb-6 flex flex-col space-y-4 border border-gray-700">
     <div className="flex justify-between">
@@ -190,18 +195,24 @@ const PostCard = ({ post }) => (
 
     {/* Post Actions (Like, Comment, Share) */}
     <div className="mt-4 flex justify-around text-gray-400 border-t border-gray-700 pt-2">
-      <button className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
-        <FaThumbsUp />
-        <span>Like</span>
-      </button>
-      <button className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
-        <FaComment />
-        <span>Comment</span>
-      </button>
-      <button className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
-        <FaShare />
-        <span>Share</span>
-      </button>
+      <Tooltip text="Like this post">
+        <button className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
+          <FaThumbsUp />
+          <span>Like</span>
+        </button>
+      </Tooltip>
+      <Tooltip text="View and add comments">
+        <Link to={`/post/${post.id}`} className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
+          <FaComment />
+          <span>Comment</span>
+        </Link>
+      </Tooltip>
+      <Tooltip text="Share this post">
+        <button className="flex items-center space-x-2 hover:text-blue-400 transition-colors duration-200">
+          <FaShare />
+          <span>Share</span>
+        </button>
+      </Tooltip>
     </div>
   </div>
 );

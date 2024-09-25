@@ -4,6 +4,23 @@ import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import PropTypes from 'prop-types';
 import { FaStar } from 'react-icons/fa';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import Tooltip from '../components/Tooltip';
+import HelpGuide from '../components/HelpGuide'; // Import HelpGuide
+
+// Fixing the default icon issue with Leaflet in React
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-icon-2x.png',
+  iconUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-icon.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+});
 
 function Places() {
   const [places, setPlaces] = useState([
@@ -12,6 +29,7 @@ function Places() {
       name: 'Sakura Park',
       location: 'Tokyo, Japan',
       description: 'A beautiful park known for its cherry blossoms.',
+      coordinates: { lat: 35.6895, lng: 139.6917 },
       reviews: [
         { id: 1, user: 'Alice', rating: 5, comment: 'Absolutely loved the cherry blossoms!' },
         { id: 2, user: 'Bob', rating: 4, comment: 'Great place to relax and enjoy nature.' },
@@ -22,6 +40,7 @@ function Places() {
       name: 'Shibuya Crossing',
       location: 'Tokyo, Japan',
       description: 'Famous intersection known for its bustling crowds.',
+      coordinates: { lat: 35.6595, lng: 139.7004 },
       reviews: [
         { id: 1, user: 'Charlie', rating: 5, comment: 'An iconic spot with amazing energy!' },
       ],
@@ -74,10 +93,29 @@ function Places() {
   return (
     <MainLayout>
       <h1 className="text-2xl font-bold mb-6">Recommended Places</h1>
-      <div className="space-y-6">
-        {places.map((place) => (
-          <PlaceCard key={place.id} place={place} />
-        ))}
+      <div className="flex flex-col lg:flex-row lg:space-x-6">
+        <div className="lg:w-2/3 space-y-6">
+          {places.map((place) => (
+            <PlaceCard key={place.id} place={place} />
+          ))}
+        </div>
+        <div className="lg:w-1/3">
+          <MapContainer center={[35.6895, 139.6917]} zoom={12} className="h-96 w-full rounded-lg">
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="© OpenStreetMap contributors"
+            />
+            {places.map((place) => (
+              <Marker key={place.id} position={[place.coordinates.lat, place.coordinates.lng]}>
+                <Popup>
+                  <strong>{place.name}</strong>
+                  <br />
+                  {place.location}
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
       </div>
 
       {/* Review Form */}
@@ -149,6 +187,9 @@ function Places() {
           </button>
         </form>
       </div>
+
+      {/* Help Guide */}
+      <HelpGuide />
     </MainLayout>
   );
 }
@@ -185,6 +226,10 @@ PlaceCard.propTypes = {
     name: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    coordinates: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+    }).isRequired,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
