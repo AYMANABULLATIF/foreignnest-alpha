@@ -1,13 +1,16 @@
-// src/index.js
+// src/index.js (Wrap App with ThemeProvider)
 
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css'; // Ensure Tailwind CSS is imported
+import ReactDOM from 'react-dom';
 import App from './App';
+import './index.css';
+import { ThemeProvider } from './components/ThemeContext';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

@@ -2,165 +2,109 @@
 
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
-import Modal from '../components/Modal';
 import PropTypes from 'prop-types';
+import { FaSearch, FaUserMinus, FaUserPlus} from 'react-icons/fa';
+
 
 function Communities() {
-  const [communities, setCommunities] = useState([
-    'Foreigners around the world',
-    'Syrians in Japan',
-    'Iraqis in Japan',
-    'Spanish in Japan',
-    'Americans in Japan',
+  const [communities,] = useState([
+    { id: 1, name: 'Syrians in Japan', description: 'A community for Syrians living in Japan.' },
+    { id: 2, name: 'Iraqis in Japan', description: 'Connecting Iraqis residing in Japan.' },
+    { id: 3, name: 'Spaniards in Japan', description: 'For Spaniards who are living in Japan.' },
     // Add more communities as needed
   ]);
 
-  const [joinedCommunities, setJoinedCommunities] = useState(['Syrians in Japan']);
-  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [joinedCommunities, setJoinedCommunities] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleJoinCommunity = (community) => {
-    if (!joinedCommunities.includes(community)) {
-      setJoinedCommunities([...joinedCommunities, community]);
+  const handleJoin = (communityId) => {
+    if (!joinedCommunities.includes(communityId)) {
+      setJoinedCommunities([...joinedCommunities, communityId]);
     }
   };
 
-  const handleLeaveCommunity = (community) => {
-    setJoinedCommunities(joinedCommunities.filter((c) => c !== community));
+  const handleLeave = (communityId) => {
+    setJoinedCommunities(joinedCommunities.filter((id) => id !== communityId));
   };
 
   const filteredCommunities = communities.filter((community) =>
-    community.toLowerCase().includes(searchTerm.toLowerCase())
+    community.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <MainLayout>
       <h1 className="text-2xl font-bold mb-6">Manage Communities</h1>
-      <div className="mb-4 flex justify-between items-center">
+      <div className="mb-6 flex items-center space-x-4">
         <input
           type="text"
+          placeholder="Search Communities..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search communities..."
-          className="w-2/3 p-2 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-grow bg-gray-800 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          onClick={() => setIsJoinModalOpen(true)}
-          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
-        >
-          Join Community
+        <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg">
+          <FaSearch />
         </button>
       </div>
-
-      <div className="flex space-x-6">
-        {/* Joined Communities */}
-        <div className="w-1/2">
-          <h2 className="text-xl font-semibold mb-4">Joined Communities</h2>
-          <ul className="space-y-2">
-            {joinedCommunities.map((community, index) => (
-              <li key={index} className="flex justify-between items-center p-2 bg-darkCard rounded-lg">
-                <span>{community}</span>
-                <button
-                  onClick={() => handleLeaveCommunity(community)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  Leave
-                </button>
-              </li>
-            ))}
-            {joinedCommunities.length === 0 && <p className="text-gray-400">You have not joined any communities.</p>}
-          </ul>
-        </div>
-
-        {/* Available Communities */}
-        <div className="w-1/2">
-          <h2 className="text-xl font-semibold mb-4">Available Communities</h2>
-          <ul className="space-y-2">
-            {filteredCommunities.map((community, index) => (
-              <li key={index} className="flex justify-between items-center p-2 bg-darkCard rounded-lg">
-                <span>{community}</span>
-                {!joinedCommunities.includes(community) ? (
-                  <button
-                    onClick={() => handleJoinCommunity(community)}
-                    className="text-blue-500 hover:text-blue-700"
-                  >
-                    Join
-                  </button>
-                ) : (
-                  <span className="text-green-500">Joined</span>
-                )}
-              </li>
-            ))}
-            {filteredCommunities.length === 0 && <p className="text-gray-400">No communities found.</p>}
-          </ul>
-        </div>
+      <div className="space-y-4">
+        {filteredCommunities.map((community) => (
+          <CommunityCard
+            key={community.id}
+            community={community}
+            isJoined={joinedCommunities.includes(community.id)}
+            onJoin={() => handleJoin(community.id)}
+            onLeave={() => handleLeave(community.id)}
+          />
+        ))}
+        {filteredCommunities.length === 0 && (
+          <p className="text-gray-400">No communities found.</p>
+        )}
       </div>
-
-      {/* Join Community Modal */}
-      <JoinCommunityModal
-        isOpen={isJoinModalOpen}
-        onClose={() => setIsJoinModalOpen(false)}
-        communities={communities}
-        onJoin={handleJoinCommunity}
-        joinedCommunities={joinedCommunities}
-      />
     </MainLayout>
   );
 }
 
-const JoinCommunityModal = ({ isOpen, onClose, communities, onJoin, joinedCommunities }) => {
-  const [selectedCommunity, setSelectedCommunity] = useState('');
-
-  const availableCommunities = communities.filter((c) => !joinedCommunities.includes(c));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (selectedCommunity) {
-      onJoin(selectedCommunity);
-      onClose();
-      setSelectedCommunity('');
-    }
-  };
-
+const CommunityCard = ({ community, isJoined, onJoin, onLeave }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <div className="bg-darkCard p-4 rounded-lg shadow-lg flex justify-between items-center">
       <div>
-        <h2 className="text-xl font-bold mb-4">Join a Community</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Select Community</label>
-            <select
-              value={selectedCommunity}
-              onChange={(e) => setSelectedCommunity(e.target.value)}
-              className="w-full p-2 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            >
-              <option value="">-- Select --</option>
-              {availableCommunities.map((community, index) => (
-                <option key={index} value={community}>
-                  {community}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg"
-          >
-            Join
-          </button>
-        </form>
+        <h2 className="text-xl font-semibold">{community.name}</h2>
+        <p className="text-gray-400">{community.description}</p>
       </div>
-    </Modal>
+      <div>
+        {isJoined ? (
+          <button
+            onClick={onLeave}
+            className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg"
+          >
+            <FaUserMinus />
+            <span>Leave</span>
+          </button>
+        ) : (
+          <button
+            onClick={onJoin}
+            className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
+          >
+            <FaUserPlus />
+            <span>Join</span>
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
-JoinCommunityModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  communities: PropTypes.arrayOf(PropTypes.string).isRequired,
+CommunityCard.propTypes = {
+  community: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  isJoined: PropTypes.bool.isRequired,
   onJoin: PropTypes.func.isRequired,
-  joinedCommunities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeave: PropTypes.func.isRequired,
 };
+
+Communities.propTypes = {};
 
 export default Communities;

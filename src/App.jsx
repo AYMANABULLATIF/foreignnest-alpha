@@ -6,13 +6,14 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import LocalPosts from './pages/LocalPosts';
 import GlobalPosts from './pages/GlobalPosts';
-import Places from './pages/Places'; // Import Places
+import Places from './pages/Places';
 import Profile from './pages/Profile';
 import QnAForumPage from './pages/QnAForumPage';
 import Events from './pages/Events';
 import Chat from './pages/Chat';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetail';
+import CommunityTab from './components/CommunityTab.jsx'; // Import CommunityTab
 
 function App() {
   return (
@@ -28,13 +29,14 @@ function App() {
         {/* Main Application Routes */}
         <Route path="/local-posts" element={<LocalPosts />} />
         <Route path="/global-posts" element={<GlobalPosts />} />
-        <Route path="/places" element={<Places />} /> {/* Add Places Route */}
+        <Route path="/places" element={<Places />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/qna" element={<QnAForumPage />} />
         <Route path="/events" element={<Events />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/post/:id" element={<PostDetail />} />
+        <Route path="/communities" element={<CommunityTab />} /> {/* Add Communities Route */}
 
         {/* Fallback Route for Undefined Paths */}
         <Route path="*" element={<Navigate to="/login" replace />} />

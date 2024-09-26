@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { FaCalendarAlt, FaUsers, FaMapMarkerAlt } from 'react-icons/fa';
 
 function Events() {
-  const [events, setEvents] = useState([
+  const [events, ] = useState([
     {
       id: 1,
       title: 'Community Meetup',

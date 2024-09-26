@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { FaEdit, FaCamera } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 function Profile() {
   const [profile, setProfile] = useState({
