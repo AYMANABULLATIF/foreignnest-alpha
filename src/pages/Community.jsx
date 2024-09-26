@@ -5,7 +5,7 @@ import MainLayout from '../layouts/MainLayout';
 //import PropTypes from 'prop-types';
 
 function Community() {
-  const [communities, setCommunities] = useState([
+  const [communities, ] = useState([
     'Syrians in Japan',
     'Iraqis in Japan',
     'Americans in Japan',

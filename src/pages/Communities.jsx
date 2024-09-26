@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import PropTypes from 'prop-types';
-import { FaSearch, FaUserMinus } from 'react-icons/fa';
+import { FaSearch, FaUserMinus, FaUserPlus} from 'react-icons/fa';
+
 
 function Communities() {
-  const [communities, setCommunities] = useState([
+  const [communities,] = useState([
     { id: 1, name: 'Syrians in Japan', description: 'A community for Syrians living in Japan.' },
     { id: 2, name: 'Iraqis in Japan', description: 'Connecting Iraqis residing in Japan.' },
     { id: 3, name: 'Spaniards in Japan', description: 'For Spaniards who are living in Japan.' },
