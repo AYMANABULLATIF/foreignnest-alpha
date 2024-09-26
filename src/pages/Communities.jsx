@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import PropTypes from 'prop-types';
-import { FaPlus, FaSearch, FaUserPlus, FaUserMinus } from 'react-icons/fa';
+import { FaSearch, FaUserMinus } from 'react-icons/fa';
 
 function Communities() {
   const [communities, setCommunities] = useState([

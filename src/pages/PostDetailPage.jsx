@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import PropTypes from 'prop-types';
-import { FaThumbsUp, FaComment, FaShare , FaUserCircle,FaPaperPlane} from 'react-icons/fa';
+//import PropTypes from 'prop-types';
+import { FaThumbsUp, FaComment, FaShare } from 'react-icons/fa';
 
 function PostDetail() {
   const { id } = useParams();

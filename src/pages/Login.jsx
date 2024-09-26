@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout'; // Corrected import path
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 function Login() {
   const [form, setForm] = useState({

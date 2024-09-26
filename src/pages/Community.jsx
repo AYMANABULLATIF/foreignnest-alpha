@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 function Community() {
   const [communities, setCommunities] = useState([

@@ -6,7 +6,7 @@ import {
   FaComment,
   FaShare,
   FaEllipsisH,
-  FaPoll,
+  
 } from 'react-icons/fa';
 import MainLayout from '../layouts/MainLayout';
 import CreatePostModal from '../components/CreatePostModal';

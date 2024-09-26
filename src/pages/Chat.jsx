@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { FaPaperPlane, FaUserCircle, FaUsers } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 function Chat() {
   const [conversations, setConversations] = useState([

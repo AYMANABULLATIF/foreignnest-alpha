@@ -1,8 +1,8 @@
 // src/components/CommunityTab.jsx
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { FaPlus, FaTrash, FaSearch } from 'react-icons/fa';
+//import PropTypes from 'prop-types';
+import { FaPlus, FaTrash,  } from 'react-icons/fa';
 import Modal from './Modal';
 
 function CommunityTab() {

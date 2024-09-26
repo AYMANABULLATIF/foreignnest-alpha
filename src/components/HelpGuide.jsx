@@ -1,7 +1,7 @@
 // src/components/HelpGuide.jsx
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
 import Modal from './Modal';
 import Tooltip from './Tooltip'; // Import Tooltip

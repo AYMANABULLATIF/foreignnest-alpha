@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { FaUserPlus } from 'react-icons/fa';
 
 function Signup() {

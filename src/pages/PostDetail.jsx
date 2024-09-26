@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { FaStar } from 'react-icons/fa';
 
 function PostDetail() {
