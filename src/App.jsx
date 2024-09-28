@@ -13,7 +13,7 @@ import Events from './pages/Events';
 import Chat from './pages/Chat';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetail';
-import CommunityTab from './components/CommunityTab.jsx'; // Import CommunityTab
+import CombinedCommunityPage from './pages/CombinedCommunityPage'; // Import CombinedCommunityPage
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/post/:id" element={<PostDetail />} />
-        <Route path="/communities" element={<CommunityTab />} /> {/* Add Communities Route */}
+        <Route path="/communities" element={<CombinedCommunityPage />} /> {/* Merged Communities Route */}
 
         {/* Fallback Route for Undefined Paths */}
         <Route path="*" element={<Navigate to="/login" replace />} />
