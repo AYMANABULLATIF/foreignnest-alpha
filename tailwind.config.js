@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#1DA1F2', // Twitter Blue
+        primary: '#1E40AF', // Example: Blue shade
+        accent: '#F97316',  // Example: Orange shade
         secondary: '#14171A', // Dark Gray
         background: '#15202B', // Deep Blue
         darkCard: '#192734', // Dark Card Background
         text: '#FFFFFF', // White Text
-        accent: '#FF4500', // Orange Red for accents
         success: '#28a745', // Green for success messages
         danger: '#dc3545', // Red for error messages
         warning: '#ffc107', // Yellow for warnings
@@ -27,8 +27,12 @@ module.exports = {
       fontFamily: {
         body: ['Arial', 'sans-serif'],
         heading: ['Helvetica', 'sans-serif'],
+        
       },
+      boxShadow: {
+        'text-shadow': '2px 2px 4px rgba(0, 0, 0, 0.5)',}
     },
   },
+
   plugins: [],
 }

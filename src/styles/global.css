@@ -56,3 +56,6 @@ textarea:focus {
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
 }
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }

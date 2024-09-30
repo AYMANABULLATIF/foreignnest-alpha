@@ -1,15 +1,16 @@
 // src/pages/Home.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import Post from '../components/Post';
 import Tabs from '../components/Tabs';
 import { Link } from 'react-router-dom';
 import { FaUsers, FaPlusCircle, FaComments, FaQuestionCircle, FaCalendarAlt, FaMapMarkerAlt, FaGlobeAmericas } from 'react-icons/fa';
+import Modal from '../components/Modal';
 
 function Home() {
   // Sample data combining global and local posts
-  const [posts, setPosts] = useState([
+  const [posts] = useState([
     {
       id: 1,
       user: 'Alice Johnson',
@@ -76,6 +77,17 @@ function Home() {
     { name: 'Local', icon: <FaMapMarkerAlt /> },
   ];
 
+  // State for Disclaimer Modal
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeenDisclaimer = localStorage.getItem('hasSeenDisclaimer');
+    if (!hasSeenDisclaimer) {
+      setIsDisclaimerOpen(true);
+      localStorage.setItem('hasSeenDisclaimer', 'true');
+    }
+  }, []);
+
   return (
     <MainLayout>
       {/* Hero Section */}
@@ -134,6 +146,24 @@ function Home() {
           {filteredPosts.length === 0 && <p className="text-gray-300 text-center">No {activeFeed} activities to display.</p>}
         </div>
       </div>
+
+      {/* Disclaimer Modal */}
+      <Modal isOpen={isDisclaimerOpen} onClose={() => setIsDisclaimerOpen(false)}>
+        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4 text-center text-white">Disclaimer</h2>
+          <p className="text-gray-300 mb-6">
+            ForeignNest is currently undergoing testing and development. This site is intended for testing purposes and to gather user feedback. Features and functionalities may change as we continue to improve the application. Thank you for your understanding and support!
+          </p>
+          <div className="flex justify-center">
+            <button
+              onClick={() => setIsDisclaimerOpen(false)}
+              className="bg-primary hover:bg-blue-500 text-white py-2 px-4 rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </Modal>
     </MainLayout>
   );
 }

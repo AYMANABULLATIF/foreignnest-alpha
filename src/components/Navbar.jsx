@@ -2,7 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHome, FaUsers, FaPlusCircle, FaUserCircle, FaGlobeAmericas, FaMapMarkerAlt, FaCalendarAlt, FaMapSigns, FaComments, FaQuestionCircle } from 'react-icons/fa';
+import {
+  FaHome,
+  FaUsers,
+  FaPlusCircle,
+  FaUserCircle,
+  FaGlobeAmericas,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaMapSigns,
+  FaComments,
+  FaQuestionCircle,
+} from 'react-icons/fa';
 
 function Navbar() {
   const location = useLocation();
@@ -32,9 +43,16 @@ function Navbar() {
   return (
     <nav className="bg-gradient-to-r from-primary to-accent text-white p-4 shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-2xl font-bold">
-          <Link to="/">ForeignNest</Link>
+        {/* Logo */}
+        <div className="text-2xl font-bold flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-1">
+            {/* Optional: Add an icon next to the text */}
+            <FaHome className="text-white" />
+            <span className="text-white">ForeignNest</span>
+          </Link>
         </div>
+
+        {/* Navigation Links */}
         <div className="flex space-x-4 items-center overflow-x-auto">
           {navItems.map((item) => (
             <Link
@@ -44,14 +62,15 @@ function Navbar() {
                 location.pathname === item.path ? 'text-gray-300 underline' : ''
               }`}
             >
-              {item.icon}
+              <span className="text-lg">{item.icon}</span>
               <span>{item.name}</span>
             </Link>
           ))}
+
           {/* Dark Mode Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-full"
+            className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-full ml-4"
             aria-label="Toggle Dark Mode"
           >
             {darkMode ? '🌞' : '🌙'}
