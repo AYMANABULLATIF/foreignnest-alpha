@@ -1,22 +1,18 @@
-// src/components/MainLayout.jsx
+// src/layouts/MainLayout.jsx
 
 import React from 'react';
-import Navbar from '../components/Navbar'; // Ensure Navbar.jsx is in the same directory
-import PropTypes from 'prop-types';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import '../styles/global.css';
 
-const MainLayout = ({ children }) => {
+function MainLayout({ children }) {
   return (
-    <div className="min-h-screen bg-darkBackground text-white">
+    <div className="bg-background text-text min-h-screen flex flex-col">
       <Navbar />
-      <main className="pt-16 px-4 md:px-8 lg:px-16">
-        {children}
-      </main>
+      <main className="flex-grow p-4 container mx-auto">{children}</main>
+      <Footer />
     </div>
   );
-};
-
-MainLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+}
 
 export default MainLayout;

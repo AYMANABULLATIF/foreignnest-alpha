@@ -1,47 +1,46 @@
 // src/App.jsx
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import LocalPosts from './pages/LocalPosts';
-import GlobalPosts from './pages/GlobalPosts';
-import Places from './pages/Places';
-import Profile from './pages/Profile';
-import QnAForumPage from './pages/QnAForumPage';
-import Events from './pages/Events';
-import Chat from './pages/Chat';
-import CreatePost from './pages/CreatePost';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Communities from './pages/Communities';
+import CommunityManagement from './pages/CommunityManagement';
+import CommunityTab from './components/CommunityTab';
 import PostDetail from './pages/PostDetail';
-import CombinedCommunityPage from './pages/CombinedCommunityPage'; // Import CombinedCommunityPage
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import Local from './pages/Local';
+import Global from './pages/Global';
+import Events from './pages/Events';
+import Places from './pages/Places';
+import Chat from './pages/Chat';
+import QnA from './pages/QnA';
+import { CommunityProvider } from './context/CommunityContext';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Redirect root to login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-
-        {/* Authentication Routes */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-
-        {/* Main Application Routes */}
-        <Route path="/local-posts" element={<LocalPosts />} />
-        <Route path="/global-posts" element={<GlobalPosts />} />
-        <Route path="/places" element={<Places />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/qna" element={<QnAForumPage />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/post/:id" element={<PostDetail />} />
-        <Route path="/communities" element={<CombinedCommunityPage />} /> {/* Merged Communities Route */}
-
-        {/* Fallback Route for Undefined Paths */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </Router>
+    <CommunityProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/communities" element={<Communities />} />
+          <Route path="/community-management" element={<CommunityManagement />} />
+          <Route path="/community-tab" element={<CommunityTab />} />
+          <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/local" element={<Local />} />
+          <Route path="/global" element={<Global />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/places" element={<Places />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/qna" element={<QnA />} />
+          {/* Add more routes as needed */}
+        </Routes>
+      </Router>
+    </CommunityProvider>
   );
 }
 

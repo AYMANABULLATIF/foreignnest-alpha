@@ -1,33 +1,60 @@
 // src/components/Modal.jsx
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Dialog, Transition } from '@headlessui/react';
 
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-
+function Modal({ isOpen, onClose, children }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      {/* Modal Content */}
-      <div className="bg-darkCard rounded-lg shadow-lg p-6 relative">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-400 hover:text-white"
-          aria-label="Close Modal"
-        >
-          &times;
-        </button>
-        {children}
-      </div>
-    </div>
+    <Transition.Root show={isOpen} as={Fragment}>
+      <Dialog as="div" className="fixed inset-0 overflow-y-auto" onClose={onClose}>
+        <div className="flex items-center justify-center min-h-screen px-4 text-center">
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          {/* This element is to trick the browser into centering the modal contents. */}
+          <span className="inline-block h-screen align-middle" aria-hidden="true">
+            &#8203;
+          </span>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-darkCard shadow-xl rounded-lg">
+              <button
+                onClick={onClose}
+                className="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl font-bold"
+                aria-label="Close Modal"
+              >
+                &times;
+              </button>
+              {children}
+            </div>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition.Root>
   );
-};
+}
 
 Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,    // Controls the visibility of the modal
-  onClose: PropTypes.func.isRequired,   // Function to close the modal
-  children: PropTypes.node.isRequired,  // Content of the modal
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Modal;
