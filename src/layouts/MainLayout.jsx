@@ -1,5 +1,5 @@
 // src/layouts/MainLayout.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -14,5 +14,7 @@ function MainLayout({ children }) {
     </div>
   );
 }
-
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 export default MainLayout;

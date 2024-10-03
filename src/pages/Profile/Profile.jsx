@@ -1,5 +1,5 @@
 // src/pages/Profile.jsx
-
+import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { CommunityContext } from '../context/CommunityContext';
@@ -261,5 +261,12 @@ const SettingOption = ({ name, icon, onClick }) => {
     </div>
   );
 };
-
+Profile.propTypes = {
+  title: PropTypes.string.isRequired,
+  timestamp: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default Profile;

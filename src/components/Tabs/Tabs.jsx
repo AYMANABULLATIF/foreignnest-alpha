@@ -1,5 +1,5 @@
 // src/components/Tabs.jsx
-
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 function Tabs({ tabs, onTabChange }) {
@@ -29,5 +29,13 @@ function Tabs({ tabs, onTabChange }) {
     </div>
   );
 }
-
+Tabs.propTypes = {
+    tabs: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        icon: PropTypes.node.isRequired,
+      }),
+    ).isRequired,
+    onTabChange: PropTypes.func.isRequired,
+  };
 export default Tabs;

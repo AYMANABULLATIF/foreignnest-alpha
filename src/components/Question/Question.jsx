@@ -1,5 +1,5 @@
 // src/components/Question.jsx
-
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FaThumbsUp, FaReply } from 'react-icons/fa';
 import Answer from './Answer';
@@ -98,5 +98,14 @@ function Question({ question }) {
     </div>
   );
 }
-
+Question.propTypes = {
+    question: PropTypes.shape({
+      likes: PropTypes.number.isRequired,
+      answers: PropTypes.arrayOf(PropTypes.object).isRequired,
+      userAvatar: PropTypes.string.isRequired,
+      user: PropTypes.string.isRequired,
+      timestamp: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 export default Question;

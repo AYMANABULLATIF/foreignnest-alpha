@@ -1,5 +1,5 @@
 // src/components/Post.jsx
-
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FaThumbsUp, FaComment, FaShare } from 'react-icons/fa';
 import Comment from './Comment';
@@ -105,5 +105,15 @@ function Post({ post }) {
     </div>
   );
 }
-
+Post.propTypes = {
+  post: PropTypes.shape({
+    likes: PropTypes.number.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+    userAvatar: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    image: PropTypes.string,
+  }).isRequired,
+};
 export default Post;

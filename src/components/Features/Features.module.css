@@ -1,0 +1,45 @@
+.features {
+    padding: 64px 32px;
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 48px;
+  }
+  
+  .featureGrid {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+  }
+  
+  .featureCard {
+    width: 300px;
+    padding: 24px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .featureCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .featureCard img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+  
+  .featureCard h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  
+  .featureCard p {
+    font-size: 1rem;
+    color: #666666;
+  }
+  

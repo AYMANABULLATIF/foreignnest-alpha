@@ -1,5 +1,5 @@
 // src/components/EventCard.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -18,5 +18,9 @@ function EventCard({ title, date, location }) {
     </div>
   );
 }
-
+EventCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+  };
 export default EventCard;

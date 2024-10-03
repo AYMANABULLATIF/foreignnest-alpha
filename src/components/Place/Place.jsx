@@ -1,5 +1,5 @@
 // src/components/Place.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import { FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 
@@ -21,5 +21,12 @@ function Place({ place }) {
     </div>
   );
 }
-
+Place.propTypes = {
+    place: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+    }).isRequired,
+  };
 export default Place;

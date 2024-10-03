@@ -1,5 +1,5 @@
 // src/components/Comment.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -14,5 +14,11 @@ function Comment({ comment }) {
     </div>
   );
 }
+Comment.propTypes = {
+    comment: PropTypes.shape({
+      user: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 
 export default Comment;

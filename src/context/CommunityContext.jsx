@@ -1,5 +1,5 @@
 // src/context/CommunityContext.jsx
-
+import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
 export const CommunityContext = createContext();
@@ -34,4 +34,7 @@ export const CommunityProvider = ({ children }) => {
       {children}
     </CommunityContext.Provider>
   );
+};
+CommunityProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

@@ -1,5 +1,5 @@
 // src/components/Feed.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import Post from './Post';
 
@@ -15,5 +15,7 @@ function Feed({ posts }) {
     </div>
   );
 }
-
+Feed.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  };
 export default Feed;

@@ -1,5 +1,5 @@
 // src/components/Event.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -21,5 +21,12 @@ function Event({ event }) {
     </div>
   );
 }
-
+Event.propTypes = {
+  event: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default Event;

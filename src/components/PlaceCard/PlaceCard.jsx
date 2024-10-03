@@ -1,5 +1,5 @@
 // src/components/PlaceCard.jsx
-
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function PlaceCard({ name, description, image }) {
@@ -13,5 +13,9 @@ function PlaceCard({ name, description, image }) {
     </div>
   );
 }
-
+PlaceCard.propTypes = {
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+  };
 export default PlaceCard;

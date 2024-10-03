@@ -1,5 +1,5 @@
 // src/components/CreateEvent.jsx
-
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FaCalendarPlus } from 'react-icons/fa';
 
@@ -97,5 +97,7 @@ function CreateEvent({ addNewEvent }) {
     </form>
   );
 }
-
+CreateEvent.propTypes = {
+    addNewEvent: PropTypes.func.isRequired,
+  };
 export default CreateEvent;

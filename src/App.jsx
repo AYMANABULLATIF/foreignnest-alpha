@@ -1,46 +1,38 @@
 // src/App.jsx
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Communities from './pages/Communities';
-import CommunityManagement from './pages/CommunityManagement';
-import CommunityTab from './components/CommunityTab';
-import PostDetail from './pages/PostDetail';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Profile from './pages/Profile';
-import Local from './pages/Local';
-import Global from './pages/Global';
-import Events from './pages/Events';
-import Places from './pages/Places';
-import Chat from './pages/Chat';
-import QnA from './pages/QnA';
-import { CommunityProvider } from './context/CommunityContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout/MainLayout';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Profile from './pages/Profile/Profile';
+import PostDetail from './pages/PostDetail/PostDetail';
+import Community from './pages/Community/Community';
+import Search from './pages/Search/Search';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
-    <CommunityProvider>
-      <Router>
+    <Router>
+      <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/communities" element={<Communities />} />
-          <Route path="/community-management" element={<CommunityManagement />} />
-          <Route path="/community-tab" element={<CommunityTab />} />
-          <Route path="/post/:id" element={<PostDetail />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/local" element={<Local />} />
-          <Route path="/global" element={<Global />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/places" element={<Places />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/qna" element={<QnA />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/search" element={<Search />} />
           {/* Add more routes as needed */}
         </Routes>
-      </Router>
-    </CommunityProvider>
+      </MainLayout>
+    </Router>
   );
 }
 
