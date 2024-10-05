@@ -1,0 +1,41 @@
+.answerForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+  }
+  
+  .answerForm textarea {
+    resize: vertical;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .textareaError {
+    border-color: #e74c3c;
+  }
+  
+  .error {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 8px;
+  }
+  
+  .submitButton {
+    align-self: flex-end;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #218838;
+  }
+  

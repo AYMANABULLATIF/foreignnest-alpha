@@ -1,0 +1,19 @@
+.userPosts {
+    max-width: 800px;
+    margin: 32px auto;
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .userPosts h2 {
+    margin-bottom: 24px;
+    color: #333333;
+  }
+  
+  .noPosts {
+    text-align: center;
+    color: #777777;
+    font-size: 1.2rem;
+  }
+  

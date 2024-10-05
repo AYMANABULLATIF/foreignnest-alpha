@@ -1,0 +1,80 @@
+.signupForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 32px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signupForm h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333333;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .formGroup label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555555;
+  }
+  
+  .formGroup input {
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .formGroup input:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  .inputError {
+    border-color: #e74c3c;
+  }
+  
+  .error {
+    margin-top: 8px;
+    color: #e74c3c;
+    font-size: 0.875rem;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #218838;
+  }
+  
+  .redirect {
+    text-align: center;
+    margin-top: 16px;
+    color: #555555;
+  }
+  
+  .redirect a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .redirect a:hover {
+    text-decoration: underline;
+  }
+  

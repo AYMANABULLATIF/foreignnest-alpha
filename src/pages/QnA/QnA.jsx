@@ -1,41 +1,58 @@
-// src/pages/QnA.jsx
-
 import React, { useState } from 'react';
-import MainLayout from '../layouts/MainLayout';
-import Question from '../components/Question';
-import CreateQuestion from '../components/CreateQuestion';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import QuestionList from '../../components/QnA/QuestionList/QuestionList';
+import AskQuestionForm from '../../components/QnA/AskQuestionForm/AskQuestionForm';
+import SearchBar from '../../components/QnA/SearchBar/SearchBar';
+import styles from './QnA.module.css';
 
 function QnA() {
-  // Sample data for questions
   const [questions, setQuestions] = useState([
+    // Initial mock data
     {
       id: 1,
-      user: 'Emily Clark',
-      userAvatar: 'https://via.placeholder.com/50',
-      timestamp: '2024-04-26T09:00:00Z',
-      text: 'What are the best places to learn Japanese in Tokyo?',
-      likes: 5,
+      user: 'Alice',
+      title: 'How to improve React performance?',
+      description: 'I am experiencing lag in my React application. What are some best practices to enhance performance?',
       answers: [
-        { id: 1, user: 'George Martin', text: 'Check out the Tokyo Language Institute.' },
+        {
+          id: 1,
+          user: 'Bob',
+          text: 'Consider using React.memo and useCallback to prevent unnecessary re-renders.',
+        },
       ],
     },
-    // Add more questions
+    {
+      id: 2,
+      user: 'Charlie',
+      title: 'What is the difference between state and props?',
+      description: 'Can someone explain the difference between state and props in React?',
+      answers: [],
+    },
   ]);
 
-  const addNewQuestion = (newQuestion) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleAskQuestion = (newQuestion) => {
     setQuestions([newQuestion, ...questions]);
   };
 
+  const filteredQuestions = questions.filter(
+    (q) =>
+      q.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      q.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <MainLayout>
-      <h1 className="text-4xl font-bold mb-6 text-center">Q&A</h1>
-      <CreateQuestion addNewQuestion={addNewQuestion} />
-      <div className="space-y-6 mt-6">
-        {questions.map((question) => (
-          <Question key={question.id} question={question} />
-        ))}
-      </div>
-    </MainLayout>
+    <div className={styles.qnaPage}>
+      <Header />
+      <main className={styles.mainContent}>
+        <AskQuestionForm onAskQuestion={handleAskQuestion} />
+        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+        <QuestionList questions={filteredQuestions} />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

@@ -1,0 +1,46 @@
+.profileHeader {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 80px;
+  }
+  
+  .coverPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .avatarContainer {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  
+  .userInfo {
+    text-align: center;
+    margin-top: 48px;
+  }
+  
+  .name {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333333;
+  }
+  
+  .bio {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #555555;
+  }
+  

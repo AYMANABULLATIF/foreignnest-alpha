@@ -1,0 +1,25 @@
+.messageItem {
+    margin-bottom: 16px;
+  }
+  
+  .messageHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  
+  .user {
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  .timestamp {
+    font-size: 0.8rem;
+    color: #888888;
+  }
+  
+  .text {
+    font-size: 1rem;
+    color: #333333;
+  }
+  

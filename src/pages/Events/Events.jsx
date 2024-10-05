@@ -1,36 +1,45 @@
-// src/pages/Events.jsx
-
-import React, { useState } from 'react';
-import MainLayout from '../layouts/MainLayout';
-import EventCard from '../components/EventCard';
-import CreateEvent from '../components/CreateEvent';
+// src/pages/Events/Events.jsx
+import React, { useContext, useState } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
+import EventsList from 'components/Events/EventsList/EventsList';
+import CreateEventForm from 'components/Events/CreateEventForm/CreateEventForm';
+import { CommunityContext } from '../../context/CommunityContext';
+import styles from './Events.module.css';
 
 function Events() {
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: 'Osaka Food Festival',
-      date: 'April 25, 2024',
-      location: 'Osaka Castle Park',
-      description: 'Join us for a day of delicious street food and live performances!',
-    },
-    // Add more events
-  ]);
+  const { posts, addCommunityPost } = useContext(CommunityContext);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const addNewEvent = (newEvent) => {
-    setEvents([newEvent, ...events]);
-  };
+  // Filter events based on search term
+  const filteredEvents = posts.filter((post) => {
+    // Assuming events have a specific category or a flag
+    const isEvent = post.category === 'Event';
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return isEvent && matchesSearch;
+  });
 
   return (
-    <MainLayout>
-      <h1 className="text-4xl font-bold mb-6 text-center">Upcoming Events</h1>
-      <CreateEvent addNewEvent={addNewEvent} />
-      <div className="space-y-6 mt-6">
-        {events.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
-    </MainLayout>
+    <div className={styles.eventsPage}>
+      <Header />
+      <Navbar />
+      <main className={styles.mainContent}>
+        <CreateEventForm onCreateEvent={addCommunityPost} />
+        <div className={styles.searchBar}>
+          <input
+            type="text"
+            placeholder="Search events..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <EventsList events={filteredEvents} />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

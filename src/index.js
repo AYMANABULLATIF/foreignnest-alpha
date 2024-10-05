@@ -1,13 +1,14 @@
-// src/index.js
-
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
-import './styles/global.css'; // Ensure global styles are imported
+import { CommunityProvider } from './context/CommunityContext';
+import './assets/styles/global.css'; // Corrected path
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <CommunityProvider>
+      <App />
+    </CommunityProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

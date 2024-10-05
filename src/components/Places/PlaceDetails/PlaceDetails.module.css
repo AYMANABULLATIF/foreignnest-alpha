@@ -1,0 +1,42 @@
+.placeDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .content {
+    max-width: 800px;
+  }
+  
+  .content h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: #333333;
+  }
+  
+  .category,
+  .location {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 8px;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555555;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  
